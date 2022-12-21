@@ -16,19 +16,13 @@ export default {
     }
   },
   methods: {
-    save: function() {
-      const obj = {completed: false, item: this.newTodoItem};
-      if(this.newTodoItem !== ''){
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
-      }
+    addTodo: function(){
+      this.$emit('addTodoItme', this.newTodoItem);
+      this.clearInput();
     },
     clearInput: function() {
       this.newTodoItem = ''
     },
-    addTodo: function(){
-      this.save();
-      this.clearInput();
-    }
   }
 }
 </script>
