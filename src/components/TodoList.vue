@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="(value, idx) in todoItem" v-bind:key="value" class="shadow" >
+    <li v-for="(value, idx) in propsdata" v-bind:key="value" class="shadow" >
       <i class="ic-check checkBtn" v-bind:class="{checkBtnCompleted: value.completed}" v-on:click="toggleComplete(value, idx)"></i>
       <span v-bind:class="{textCompleted: value.completed}">{{ value.item }}</span>
       <span class="removeBtn" v-on:click="removeTodo(value, idx)">
@@ -12,11 +12,7 @@
 
 <script>
 export default {
-  data: function (){
-    return {
-      todoItem: []
-    }
-  },
+  props: ['propsdata'],
   methods: {
     removeTodo: function(item, idx){
       localStorage.removeItem(item.item);
@@ -27,14 +23,6 @@ export default {
        localStorage.removeItem(item.item);
        localStorage.setItem(item.item, JSON.stringify(item))
     },
-  },
-  created: function() {
-    if(localStorage.length > 0) {
-      for(let i = 0; i<localStorage.length; i++){
-        const obj = JSON.parse(localStorage.getItem(localStorage.key(i)))
-        this.todoItem.push(obj)
-      }
-    }
   }
 }
 </script>
