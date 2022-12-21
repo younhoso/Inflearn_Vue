@@ -1,8 +1,9 @@
 <template>
   <ul>
-    <li class="shadow" v-for="(item, idx) in todoItem" v-bind:key="item">
-      {{ item }}
-      <span class="removeBtn" v-on:click="removeTodo(item, idx)">
+    <li v-for="(value, idx) in todoItem" v-bind:key="value" class="shadow" >
+      <i class="ic-check checkBtn" v-bind:class="{checkBtnCompleted: value.completed}" v-on:click="toggleComplete(value, idx)"></i>
+      <span v-bind:class="{textCompleted: value.completed}">{{ value.item }}</span>
+      <span class="removeBtn" v-on:click="removeTodo(value, idx)">
         <i class="ic-bin"></i>
       </span>
     </li>
@@ -18,14 +19,20 @@ export default {
   },
   methods: {
     removeTodo: function(item, idx){
-      localStorage.removeItem(item);
+      localStorage.removeItem(item.item);
       this.todoItem.splice(idx, 1);
-    }
+    },
+    toggleComplete: function(item, idx) {
+       item.completed = !item.completed;
+       localStorage.removeItem(item.item);
+       localStorage.setItem(item.item, JSON.stringify(item))
+    },
   },
   created: function() {
     if(localStorage.length > 0) {
       for(let i = 0; i<localStorage.length; i++){
-       this.todoItem.push(localStorage.key(i))
+        const obj = JSON.parse(localStorage.getItem(localStorage.key(i)))
+        this.todoItem.push(obj)
       }
     }
   }
@@ -56,9 +63,7 @@ export default {
     color: #62acde;
     margin-right: 5px;
   }
-  .checkBtnCompleted {
-    color: #b3adad
-  }
+
   .textCompleted {
     text-decoration: line-through;
     color: #b3adad;
@@ -69,7 +74,6 @@ export default {
   .checkBtn {
     line-height: 45px;
     color: #62acde;
-    margin-right: 5px;
   }
   .checkBtnCompleted {
     color: #b3adad;

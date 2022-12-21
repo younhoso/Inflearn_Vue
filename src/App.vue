@@ -26,14 +26,14 @@ export default {
 <style>
   body {
     text-align: center;
-    background-color: groove;
+    background-color: #eee;
   }
   input {
-    border-style: groove;
+    border-style: #eee;
     width: 200px;
   }
   button {
-    border-style:groove;
+    border-style:#eee;
   }
   .shadow {
     box-shadow: 5px 10px 10px rgba(0,0,0, 0.03);
