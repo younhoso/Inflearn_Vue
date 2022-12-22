@@ -1,7 +1,7 @@
-import Vue from 'vue';
-import App from './App.vue';
-import './assets/fonts/index.css'
+import Vue from "vue";
+import App from "./App.vue";
+import "./assets/fonts/index.css";
 
 new Vue({
   render: (h) => h(App),
-}).$mount('#app');
+}).$mount("#app");
