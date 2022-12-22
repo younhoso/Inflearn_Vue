@@ -5,14 +5,19 @@
     <span v-on:click="addTodo" class="addContainer">
       <i class="ic-plus addBtn"></i>
     </span>
+
+    <Modal v-bind:propsopen="open"/>
   </div>
 </template>
 
 <script>
+import Modal from './common/Modal.vue';
+
 export default {
   data: function(){
     return {
-      newTodoItem: ''
+      newTodoItem: '',
+      open: false
     }
   },
   methods: {
@@ -23,6 +28,9 @@ export default {
     clearInput: function() {
       this.newTodoItem = ''
     },
+  },
+  components: {
+    Modal: Modal
   }
 }
 </script>
@@ -37,18 +45,22 @@ export default {
     height: 50px;
     line-height: 50px;
     border-radius: 5px;
+    display: flex;
   }
 
   .inputBox input {
+    width: 100%;
+    height: 100%;
+    padding: 0 20px 0 20px;
+    box-sizing: border-box;
     border-style: none;
     font-size: 0.9rem;
   }
 
   .addContainer {
-    float: right;
+    width: 4rem;
     background: linear-gradient(to right, #6478F8, #8763FB);
     display: block;
-    width: 3rem;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
   }
