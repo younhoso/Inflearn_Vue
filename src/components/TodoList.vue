@@ -1,7 +1,10 @@
 <template>
   <ul>
-    <li v-for="(value, idx) in propsdata" v-bind:key="value" class="shadow" >
-      <i class="ic-check checkBtn" v-bind:class="{checkBtnCompleted: value.completed}" v-on:click="toggleComplete(value, idx)"></i>
+    <li class="shadow" v-for="(value, idx) in propsdata" v-bind:key="value">
+      <i class="ic-check checkBtn"
+        v-bind:class="{checkBtnCompleted: value.completed}" 
+        v-on:click="toggleComplete(value, idx)">
+      </i>
       <span v-bind:class="{textCompleted: value.completed}">{{ value.item }}</span>
       <span class="removeBtn" v-on:click="removeTodo(value, idx)">
         <i class="ic-bin"></i>
@@ -18,9 +21,7 @@ export default {
       this.$emit('removeItem', item, idx);
     },
     toggleComplete: function(item, idx) {
-       item.completed = !item.completed;
-       localStorage.removeItem(item.item);
-       localStorage.setItem(item.item, JSON.stringify(item))
+      this.$emit('toggleItem', item, idx);
     },
   }
 }
