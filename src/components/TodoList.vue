@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li class="shadow" v-for="(value, idx) in propsdata" v-bind:key="value">
+    <li class="shadow" v-for="(value, idx) in propsdata" v-bind:key="value.item">
       <i class="ic-check checkBtn"
         v-bind:class="{checkBtnCompleted: value.completed}" 
         v-on:click="toggleComplete(value, idx)">

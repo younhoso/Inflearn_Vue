@@ -6,7 +6,14 @@
       <i class="ic-plus addBtn"></i>
     </span>
 
-    <Modal v-bind:propsopen="open"/>
+    <Modal v-if="showModal" @close="showModal = false">
+      <div class="showModal" slot="body">
+        <p>모달입니다.</p>
+        <div class="modal-footer">
+          <button class="modal-default-button" @click="showModal = false">OK</button>
+        </div>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -17,13 +24,17 @@ export default {
   data: function(){
     return {
       newTodoItem: '',
-      open: false
+      showModal: false
     }
   },
   methods: {
     addTodo: function(){
-      this.$emit('addTodoItme', this.newTodoItem);
-      this.clearInput();
+      if(this.newTodoItem !== ''){
+        this.$emit('addTodoItme', this.newTodoItem);
+        this.clearInput();
+      } else {
+        this.showModal = !this.showModal;
+      }
     },
     clearInput: function() {
       this.newTodoItem = ''
@@ -39,7 +50,6 @@ export default {
   input:focus {
     outline: none;
   }
-
   .inputBox {
     background: white;
     height: 50px;
@@ -70,5 +80,14 @@ export default {
     vertical-align: middle;
     font-size: 22px;
     font-weight: 800;
+  }
+
+  .showModal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
   }
 </style>

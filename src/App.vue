@@ -26,12 +26,8 @@ export default {
   methods: {
     addItem: function(todoItem){
       const obj = {completed: false, item: todoItem};
-      if(todoItem !== ''){
-        localStorage.setItem(todoItem, JSON.stringify(obj));
-        this.todoItems.push(obj);
-      } else {
-        
-      }
+      localStorage.setItem(todoItem, JSON.stringify(obj));
+      this.todoItems.push(obj);
     },
     removeOneItem: function(item, idx) {
       localStorage.removeItem(item.item);
