@@ -2,9 +2,8 @@
   <transition-group name="list" tag="ul">
     <li
       class="shadow"
-      v-for="(value, idx) in propsdata"
-      v-bind:key="value.item"
-    >
+      v-for="(value, idx) in this.$store.state.todoItems"
+      v-bind:key="value.item">
       <i
         class="ic-check checkBtn"
         v-bind:class="{ checkBtnCompleted: value.completed }"
@@ -23,13 +22,12 @@
 
 <script>
 export default {
-  props: ["propsdata"],
   methods: {
-    removeTodo: function (item, idx) {
-      this.$emit("removeItem", item, idx);
+    removeTodo(item, idx) {
+      this.$store.commit('removeOneItem', {item, idx});
     },
-    toggleComplete: function (item, idx) {
-      this.$emit("toggleItem", item, idx);
+    toggleComplete(item, idx) {
+      this.$store.commit('toggleOneItem', {item, idx});
     },
   },
 };
@@ -60,10 +58,6 @@ li {
   margin-right: 5px;
 }
 
-.textCompleted {
-  text-decoration: line-through;
-  color: #b3adad;
-}
 .removeBtn {
   color: #de4343;
 }
