@@ -26,6 +26,7 @@ export const store = new Vuex.Store({
       return state.todoItems;
     }
   },
+
   mutations: {
     addItem(state, todoItem) {
       const obj = { completed: false, item: todoItem };
@@ -42,6 +43,7 @@ export const store = new Vuex.Store({
       state.todoItems[idx].completed = !state.todoItems[idx].completed;
       localStorage.removeItem(item);
       localStorage.setItem(item, JSON.stringify(item));
+
     },
     clearAllItem(state) {
       localStorage.clear();

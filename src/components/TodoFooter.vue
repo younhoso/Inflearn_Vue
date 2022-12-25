@@ -8,9 +8,9 @@
 import { mapMutations } from 'vuex'
 export default {
   methods: {
-    ...mapMutations({
-      clearTodo:'clearAllItem'
-    })
+   ...mapMutations({
+     clearTodo:'clearAllItem'
+   })
   },
 };
 </script>
